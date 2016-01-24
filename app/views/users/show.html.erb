@@ -2,14 +2,24 @@
     <%= gravatar_for @user %>
     <%= @user.name %>
 </h1>
-<% if @user.introduction.present? %>
-自己紹介
-<%= @user.introduction %>
-<% end %>
-<% if @user.birthday.present? %>
-誕生日
-<%= @user.birthday %>
-<% end %>
-メールアドレス
-<%= @user.email %>
-<%= link_to "プロフィールの編集", edit_user_path %>
+<table class="table" style="width: 50%">
+    <tbody>
+        <% if @user.introduction.present? %>
+        <tr>
+            <th>自己紹介</th>
+            <td><%= @user.introduction %></td>
+        </tr>
+        <% end %>
+        <% if @user.birthday.present? %>
+        <tr>
+            <th>誕生日</th>
+            <td><%= @user.birthday %></td>
+        </tr>
+        <% end %>
+        <tr>
+            <th>メールアドレス</th>
+            <td><%= @user.email %></td>
+        </tr>
+    </tbody>
+</table>
+<%= link_to "プロフィールの編集", edit_user_path, { :class => "btn btn-primary" } %>

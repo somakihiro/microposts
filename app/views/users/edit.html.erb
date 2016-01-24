@@ -1,13 +1,33 @@
-<h1>プロフィールの編集</h1>
-<%= form_for(@user) do |f| %>
-<%= render 'shared/error_messages', object: f.object %>
-名前
-<%= f.text_field :name %>
-自己紹介
-<%= f.text_area :introduction %>
-誕生日
-<%= f.date_field :birthday %>
-メールアドレス
-<%= f.text_field :email %>
-<%= f.submit "変更を保存" %>
-<% end %>
+<div class="row">
+    <h1>プロフィールの編集</h1>
+    <%= form_for(@user) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-xs-2">
+                    名前<%= f.text_field :name, class: "form-control" %>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    自己紹介<%= f.text_area :introduction, class: "form-control", rows: "6" %>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-2">
+                    誕生日<%= f.date_field :birthday, class: "form-control" %>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-3">
+                    メールアドレス<%= f.text_field :email, class: "form-control" %>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-2">
+                    <%= f.submit "変更を保存", class: "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
