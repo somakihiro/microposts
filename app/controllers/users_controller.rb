@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  #before_action :user_params, only: [:edit, :update]
-  
+  before_action :set_users, only: [:show,:edit, :update]
+  before_action :authenticate, only: [:edit, :update]
+
   def show # 追加
-    @user = User.find(params[:id])
   end
   
   def new
@@ -20,11 +20,9 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = User.find(params[:id])
   end
   
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       # 変更に成功した場合は、idページへリダイレクト
       redirect_to user_path, notice: "プロフィールを変更しました。"
@@ -36,6 +34,14 @@ class UsersController < ApplicationController
   
   private
   
+  def set_users
+    @user = User.find(params[:id])
+  end
+
+  def authenticate
+    redirect_to root_url unless @user == current_user
+  end
+
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :introduction, :birthday)
   end

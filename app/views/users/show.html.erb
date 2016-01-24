@@ -2,13 +2,14 @@
     <%= gravatar_for @user %>
     <%= @user.name %>
 </h1>
+<% if @user.introduction.present? %>
 自己紹介
 <%= @user.introduction %>
-<br>
+<% end %>
+<% if @user.birthday.present? %>
 誕生日
 <%= @user.birthday %>
-<br>
+<% end %>
 メールアドレス
 <%= @user.email %>
-<br>
 <%= link_to "プロフィールの編集", edit_user_path %>
