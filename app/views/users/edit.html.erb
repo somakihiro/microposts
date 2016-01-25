@@ -20,7 +20,17 @@
             </div>
             <div class="form-group">
                 <div class="col-xs-3">
-                    メールアドレス<%= f.text_field :email, class: "form-control" %>
+                    メールアドレス<%= f.email_field :email, class: "form-control" %>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-3">
+                    パスワード<%= f.password_field :password, class: "form-control" %>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-3">
+                    パスワード(確認)<%= f.password_field :password_confirmation, class: "form-control" %>
                 </div>
             </div>
             <div class="form-group">
