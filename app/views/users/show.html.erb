@@ -5,6 +5,31 @@
                 <%= gravatar_for @user %>
                 <%= @user.name %>
             </h1>
+            <div class="profile-table">
+                <table class="table">
+                    <tbody>
+                        <% if @user.introduction.present? %>
+                            <tr>
+                                <th>自己紹介</th>
+                                <td><%= @user.introduction %></td>
+                            </tr>
+                        <% end %>
+                        <% if @user.birthday.present? %>
+                            <tr>
+                                <th>誕生日</th>
+                                <td><%= @user.birthday %></td>
+                            </tr>
+                        <% end %>
+                            <tr>
+                                <th>メールアドレス</th>
+                                <td><%= @user.email %></td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+            <% if @user == current_user %>
+                <%= link_to "プロフィールの編集", edit_user_path, { :class => "btn btn-primary" } %>
+            <% end %>
         </section>
     </aside>
     <div class="col-md-8">

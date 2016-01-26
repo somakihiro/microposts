@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+.profile-table {
+    margin-top: 80px;
+}
