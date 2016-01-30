@@ -1,0 +1,16 @@
+<div class="row">
+    <%= render 'users/profile' %>
+    <div class="col-md-8">
+        <% if @users.any? %>
+            <h3>フォロー(<%= @users.count %>)</h3>
+                <ol class="followings">
+                    <% @users.each do |user| %>
+                        <li>
+                            <%= link_to gravatar_for(user, size: 50), user %>
+                            <span class="user"><%= link_to user.name, user %></span>
+                        </li>
+                    <% end %>
+                </ol>
+        <% end %>
+    </div>
+</div>
