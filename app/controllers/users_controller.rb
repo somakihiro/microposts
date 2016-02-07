@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_users, only: [:show, :edit, :update, :followings, :followers, :like]
-  before_action :authenticate, only: [:edit, :update, :followings, :followers, :like]
+  before_action :authenticate, only: [:edit, :update,]
+  before_action :logged_in_user, only: [:followings, :followers, :like]
 
   def show
     #@users = User.page(params[:page])
@@ -15,6 +16,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "登録が完了しました。"
+      session[:user_id] = @user.id
       redirect_to @user
     else
       render 'new'
