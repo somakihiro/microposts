@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
+  paginates_per 3
+  
   has_secure_password
   has_many :microposts
   
@@ -18,6 +20,10 @@ class User < ActiveRecord::Base
                                     dependent:  :destroy
   
   has_many :follower_users, through: :follower_relationships, source: :follower
+  
+  has_many :likes
+  has_many :like_microposts, through: :likes, source: :micropost
+  
   
   # 他のユーザーをフォローする
   def follow(other_user)
@@ -37,5 +43,17 @@ class User < ActiveRecord::Base
   
   def feed_items
     Micropost.where(user_id: following_user_ids + [self.id])
+  end
+  
+  def like?(micropost)
+    like_microposts.include?(micropost)
+  end
+  
+  def like!(micropost)
+    likes.find_or_create_by(micropost_id: micropost.id)
+  end
+  
+  def unlike!(micropost)
+    likes.find_by(micropost_id: micropost.id).destroy
   end
 end

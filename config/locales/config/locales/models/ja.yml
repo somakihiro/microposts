@@ -12,3 +12,10 @@ ja:
         email: メールアドレス
         salon_id: サロン
         password: パスワード
+  views:
+    pagination:
+      first: "&laquo;"
+      last: "&raquo;"
+      previous: "&lsaquo;"
+      next: "&rsaquo;"
+      truncate: "..."

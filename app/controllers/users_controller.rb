@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_users, only: [:show, :edit, :update, :followings, :followers]
+  before_action :set_users, only: [:show, :edit, :update, :followings, :followers, :like]
   before_action :authenticate, only: [:edit, :update]
 
-  def show # 追加
-    @user = User.find(params[:id])
-    @microposts = @user.microposts.order(created_at: :desc)
+  def show
+    #@users = User.page(params[:page])
+    @microposts = @user.microposts.order(created_at: :desc).page(params[:page])
   end
   
   def new
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "登録が完了しました。"
       redirect_to @user
     else
       render 'new'
@@ -36,12 +36,18 @@ class UsersController < ApplicationController
   
   def followings
     @user = User.find(params[:id])
-    @users = @user.following_users
+    @users = @user.following_users.page(params[:page])
   end
   
   def followers
     @user = User.find(params[:id])
-    @users = @user.follower_users
+    @users = @user.follower_users.page(params[:page])
+  end
+  
+  def like
+    @title = 'いいね一覧'
+    @micropost = current_user.microposts.build
+    @feed_microposts = current_user.like_microposts
   end
   
   private

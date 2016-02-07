@@ -1,0 +1,9 @@
+<div class="row">
+    <%= render 'users/profile' %>
+    <div class="col-md-8">
+        <h3><%= @title %></h3>
+            <ol class="microposts">
+                <%= render @feed_microposts %>
+            </ol>
+    </div>
+</div>

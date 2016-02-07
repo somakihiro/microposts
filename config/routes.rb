@@ -9,11 +9,13 @@ Rails.application.routes.draw do
     member do
       get 'followings'
       get 'followers'
+      get 'like'
     end
   end
   
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts
   resources :relationships, only: [:create, :destroy]
+  resources :likes, only: [:create, :destroy]
   
 end
