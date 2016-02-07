@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_users, only: [:show, :edit, :update, :followings, :followers, :like]
-  before_action :authenticate, only: [:edit, :update]
+  before_action :authenticate, only: [:edit, :update, :followings, :followers, :like]
 
   def show
     #@users = User.page(params[:page])
